@@ -11,15 +11,15 @@ jobs:
       uses: actions/checkout@v2
     - uses: EndBug/add-and-commit@v7
       with:
-          remove: 'indoor-bj-unicom-iptv-original.m3u --force'     
+          remove: '*.m3u --force'     
     - name: cd to root
       run: cd /
     - name: wget
-      run: wget https://raw.githubusercontent.com/wuwentao/bj-unicom-iptv/master/bj-unicom-iptv.m3u -O indoor-bj-unicom-iptv-original.m3u
-    - name: modify indoor
-      run: find -name 'indoor-bj-unicom-iptv-original.m3u' | xargs perl -pi -e 's|rtp://|http://10.10.10.1:8680/rtp/|g'
+      run: wget https://raw.githubusercontent.com/wuwentao/bj-unicom-iptv/master/bj-unicom-iptv.m3u -O indoor-bj-unicom-iptv.m3u
+    - name: modify outdoor
+      run: find -name 'indoor-bj-unicom-iptv.m3u' | xargs perl -pi -e 's|rtp://|http://10.10.10.1:8680/rtp/|g'
     - uses: EndBug/add-and-commit@v7
       with:
           message: 'Add new file'
-          add: 'indoor-bj-unicom-iptv-original.m3u --force'
+          add: '*.m3u --force'
           push: 'origin ${{ github.event.inputs.branch }} --force'
