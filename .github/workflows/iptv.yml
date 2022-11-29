@@ -8,8 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
-    - uses: EndBug/add-and-commit@v7
+      uses: actions/checkout@v3
+    - uses: EndBug/add-and-commit@v9
       with:
           remove: '*.m3u --force'     
     - name: cd to root
@@ -18,7 +18,7 @@ jobs:
       run: wget https://raw.githubusercontent.com/wuwentao/bj-unicom-iptv/master/bj-unicom-iptv.m3u -O indoor-bj-unicom-iptv.m3u
     - name: modify outdoor
       run: find -name 'indoor-bj-unicom-iptv.m3u' | xargs perl -pi -e 's|rtp://|http://10.10.10.1:8680/rtp/|g'
-    - uses: EndBug/add-and-commit@v7
+    - uses: EndBug/add-and-commit@v9
       with:
           message: 'Add new file'
           add: '*.m3u --force'
